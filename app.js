@@ -17,6 +17,11 @@ function createBoard() {
 		square.classList.add(shuffledArray[i]);
 		grid.appendChild(square);
 		squares.push(square);
+
+		// Add eventListner
+		square.addEventListener('click', function(e) {
+			click(square);
+		});
 	}
 
 	// Add numbers
@@ -35,9 +40,28 @@ function createBoard() {
 			if (i < 88 && !isRightEdge && squares[i + 1 + width].classList.contains('bomb')) total++;
 			if (i < 89 && squares[i + width].classList.contains('bomb')) total++;
 			squares[i].setAttribute('data', total);
-			console.log(squares[i]);
 		}
 	}
 }
 
 createBoard();
+
+// Click on square action
+function click(square) {
+	if (isGameOver) return;
+
+	if (square.classList.contains('checked') || square.classList.contains('flag')) return;
+
+	if (square.classList.contains('bomb')) {
+		console.log('Game Over');
+	} else {
+		let total = square.getAttribute('data');
+		if (total != 0) {
+			square.classList.add('checked');
+			square.innerHTML = total;
+			return;
+		}
+
+		square.classList.add('checked');
+	}
+}
