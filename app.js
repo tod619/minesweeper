@@ -24,6 +24,12 @@ function createBoard() {
 		square.addEventListener('click', function(e) {
 			click(square);
 		});
+
+		// cntrl and left click
+		square.oncontextmenu = function(e) {
+			e.preventDefault();
+			addFlag(square);
+		};
 	}
 
 	// Add numbers
