@@ -63,6 +63,7 @@ function addFlag(square) {
 			square.classList.add('flag');
 			square.innerHTML = '⛳';
 			flags++;
+			checkForWin();
 		} else {
 			square.classList.remove('flag');
 			square.innerHTML = '';
@@ -159,4 +160,19 @@ function gameOver(square) {
 			square.innerHTML = '💣';
 		}
 	});
+}
+
+// Check for a win
+function checkForWin() {
+	let matches = 0;
+	for (let i = 0; i < squares.length; i++) {
+		if (squares[i].classList.contains('flag') && squares[i].classList.contains('bomb')) {
+			matches++;
+		}
+
+		if (matches === bombAmount) {
+			console.log('You Win!');
+			isGameOver = true;
+		}
+	}
 }
