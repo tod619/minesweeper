@@ -56,7 +56,7 @@ function click(square) {
 	if (square.classList.contains('checked') || square.classList.contains('flag')) return;
 
 	if (square.classList.contains('bomb')) {
-		console.log('Game Over');
+		gameOver(square);
 	} else {
 		let total = square.getAttribute('data');
 		if (total != 0) {
@@ -124,4 +124,16 @@ function checkSquare(square, currentId) {
 			click(newSquare);
 		}
 	}, 10);
+}
+
+// GameOver function
+function gameOver(square) {
+	isGameOver = true;
+
+	// Show all bomb locations
+	squares.forEach((square) => {
+		if (square.classList.contains('bomb')) {
+			square.innerHTML = '💣';
+		}
+	});
 }
